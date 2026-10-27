@@ -64,11 +64,12 @@ export function getSampleReviews(productId: string, category: CategorySlug): Sam
   const reviews: SampleReview[] = [];
   for (let i = 0; i < Math.min(count, source.length); i++) {
     const item = source[(h + i) % source.length];
+    if (!item) continue;
     const day = 1 + ((h >> (i + 2)) % 27);
     const month = 6 + ((h >> i) % 4);
     reviews.push({
       id: `${productId}-r${i}`,
-      author: authors[(h + i * 3) % authors.length],
+      author: authors[(h + i * 3) % authors.length] ?? "کاربر",
       rating: item.rating,
       title: item.title,
       body: item.body,

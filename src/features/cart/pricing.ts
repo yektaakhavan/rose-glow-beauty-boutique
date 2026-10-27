@@ -36,6 +36,12 @@ export const SHIPPING_METHODS: ShippingMethod[] = [
   },
 ];
 
+export const DEFAULT_SHIPPING: ShippingMethod = SHIPPING_METHODS[0] as ShippingMethod;
+
+export function getShippingMethod(id: string): ShippingMethod {
+  return SHIPPING_METHODS.find((m) => m.id === id) ?? DEFAULT_SHIPPING;
+}
+
 export interface CartLine {
   key: string;
   product: Product;
@@ -102,7 +108,7 @@ export interface CartTotals {
   remainingForFreeShipping: number;
 }
 
-export function computeTotals(lines: CartLine[], method: ShippingMethod = SHIPPING_METHODS[0]): CartTotals {
+export function computeTotals(lines: CartLine[], method: ShippingMethod = DEFAULT_SHIPPING): CartTotals {
   const subtotal = lines.reduce((s, l) => s + l.lineTotal, 0);
   const savings = lines.reduce((s, l) => s + l.lineSavings, 0);
   const itemCount = lines.reduce((s, l) => s + l.quantity, 0);
