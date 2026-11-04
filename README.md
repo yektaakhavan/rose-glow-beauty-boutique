@@ -1,1290 +1,334 @@
-# Rose Glow Beauty Boutique
+# Rose Glow Beauty Boutique — Rozhan
 
-🎯 پروژه: طراحی و توسعه یک فروشگاه اینترنتی حرفه‌ای محصولات آرایشی و بهداشتی
+A Persian (RTL) beauty & skincare storefront built with TanStack Start, React 19, and TypeScript. Featuring a custom design system, a URL-driven product query engine, persisted cart / wishlist / demo-order stores, and per-route SEO.
 
-۱. نقش و هدف پروژه
+[![TanStack Start](https://img.shields.io/badge/TanStack_Start-Router-EF4444?logo=reactrouter&logoColor=white)](https://tanstack.com/start)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Zustand](https://img.shields.io/badge/Zustand-5-433E38)](https://zustand.docs.pmnd.rs/)
+[![Vitest](https://img.shields.io/badge/Vitest-Tested-6E9F18?logo=vitest&logoColor=white)](https://vitest.dev/)
 
-تو در نقش یک تیم حرفه‌ای متشکل از Senior Frontend Developer، UI/UX Designer و E-commerce Specialist فعالیت می‌کنی.
+> **Project type:** Frontend engineering showcase (work in progress).
+>
+> Rozhan (روژان) is a fictional online beauty store. Its products, brands, reviews, articles, and prices are sample content. There is no backend, no real payment, and no real user account — cart, wishlist, orders, and profile are stored only in the visitor's browser. See [Demo Limitations](#demo-limitations).
 
-هدف، توسعه یک وب‌سایت فروشگاهی کامل، مدرن، زیبا و کاملاً ریسپانسیو برای فروش محصولات آرایشی، مراقبت از پوست، مراقبت از مو و محصولات زیبایی است.
+---
 
-این پروژه باید در سطح یک محصول واقعی و حرفه‌ای طراحی شود و بتوان از آن به‌عنوان یک نمونه‌کار جدی در پورتفولیوی یک توسعه‌دهنده فرانت‌اند استفاده کرد.
+## Table of Contents
 
-خروجی نباید صرفاً یک صفحه نمایشی یا طرح اولیه باشد؛ بلکه باید شامل صفحات اصلی فروشگاه، کامپوننت‌های قابل استفاده مجدد، تعاملات کاربردی، تجربه خرید استاندارد و ساختار فنی قابل توسعه باشد.
+- [Overview](#overview)
+- [Screenshots](#screenshots)
+- [Features](#features)
+- [Project Status](#project-status)
+- [Tech Stack](#tech-stack)
+- [Architecture & Key Decisions](#architecture--key-decisions)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Demo Limitations](#demo-limitations)
+- [Author](#author)
 
-اولویت‌های اصلی پروژه:
+---
 
-1. طراحی UI/UX حرفه‌ای و مطابق با استانداردهای فروشگاه‌های اینترنتی مدرن.
+## Overview
 
-2. طراحی بصری منحصربه‌فرد و متناسب با صنعت Beauty & Cosmetics.
+Rose Glow Beauty Boutique is a responsive, Persian-language e-commerce storefront for a fictional beauty brand, **Rozhan**. It covers makeup, skincare, haircare, fragrance, tools, and body care.
 
-3. تجربه خرید ساده، سریع و قابل اعتماد.
+The project focuses on the engineering behind a real shop rather than static pages: typed catalog data, a product query engine synchronized with URL search params, cart and stock rules, shipping and pricing logic, hydration-safe persisted stores, and per-route SEO metadata.
 
-4. پیاده‌سازی با Next.js و TypeScript. (در صورت امکان)
+The interface is fully right-to-left (`lang="fa"`, `dir="rtl"`) and uses a rose-gold design system built on Tailwind CSS v4 design tokens.
 
-5. استفاده اصولی از کتابخانه‌های معتبر و پرکاربرد اکوسیستم JavaScript.
+The application is built with TanStack Start (file-based routing and SSR) and strict TypeScript.
 
-6. ریسپانسیو بودن کامل در موبایل، تبلت، لپ‌تاپ و نمایشگرهای بزرگ.
+## Screenshots
 
-7. پیاده‌سازی واقعی قابلیت‌های تعاملی، نه صرفاً دکمه‌ها و المان‌های نمایشی.
+<!-- Add screenshots to docs/screenshots/ and uncomment.
 
-8. رعایت اصول دسترس‌پذیری، بهینه‌سازی عملکرد، سئو و نگهداشت‌پذیری کد.
+### Homepage
 
+![Home page](docs/screenshots/home.png)
 
+### Shop & Product Detail
 
-───
+| Shop | Product Detail |
+| --- | --- |
+| ![Shop](docs/screenshots/shop.png) | ![Product detail](docs/screenshots/product-detail.png) |
 
+### Mobile Experience
 
+<img src="docs/screenshots/mobile-menu.png" alt="Mobile navigation menu" width="240">
+-->
 
-۲. هویت بصری و طراحی رابط کاربری
+_Screenshots coming soon._
 
-طراحی باید حس یک برند حرفه‌ای محصولات آرایشی و مراقبت از پوست را منتقل کند.
+---
 
-سبک طراحی
+## Features
 
-از سبک‌های زیر الهام بگیر:
+### Storefront Pages
 
-• Modern Beauty E-commerce
+- Home page with hero section and best-selling products.
+- Shop page, category pages, search results, sale and new-arrivals pages.
+- Product detail pages with brand, pricing, discount display, add-to-cart, and wishlist actions.
+- Designed not-found and error states for unknown products, categories, and failed routes.
 
-• Minimal Luxury
+### Product Query Engine
 
-• Clean Editorial Design
+- Filtering by category, brand, shopping need, price range, stock availability, sale status, and minimum rating.
+- Five sort options: best-selling, newest, price ascending, price descending, and rating.
+- Page-based "show more" pagination.
+- Search that normalizes Persian and Arabic letter variants (such as `ي` / `ی` and `ك` / `ک`), zero-width non-joiners, and diacritics, and matches product name, type, brand, and description.
+- State synchronized with URL search params through a tolerant parser: malformed values are dropped, never thrown.
 
-• Premium Skincare Branding
+### Cart, Pricing & Stock Logic
 
-• Contemporary Fashion & Beauty Websites
+- Per-line quantity limits and stock checks when adding to the cart.
+- Variant-aware cart lines (shade and size) with unit price, compare-at price, line total, and savings.
+- Three shipping methods (standard post, Tipax, Tehran courier — the last restricted to Tehran addresses).
+- Free standard shipping above a configurable subtotal threshold.
+- Demo orders that consume stock locally, so availability reflects orders placed in the same browser.
 
-طراحی باید مینیمال، شیک، ظریف و مدرن باشد؛ اما نباید بیش از حد ساده، خالی یا شبیه قالب‌های آماده و تکراری به نظر برسد.
+### Persisted Demo State
 
-پالت رنگی پیشنهادی
+- Zustand stores for cart, wishlist, orders, and account profile.
+- Versioned `localStorage` keys.
+- Hydration-safe persistence: server renders and the first client render use empty state, and stores rehydrate after mount to avoid mismatches.
 
-از یک پالت رنگی هماهنگ و محدود استفاده کن:
+### Layout & Navigation
 
-• رنگ پس‌زمینه اصلی: سفید گرم یا کرم بسیار روشن.
+- Announcement bar, header with mega menu, search, wishlist, account, and cart icons with live item count.
+- Mega menu with `aria-expanded` / `aria-controls` and Escape-to-close.
+- Mobile navigation panel and footer.
+- Newsletter form validated with React Hook Form and Zod (demo only, nothing is sent).
 
-• رنگ ثانویه: صورتی ملایم و پودری.
+### Design System
 
-• رنگ تأکیدی: رزگلد یا رنگ توتی ملایم.
+- CSS-variable design tokens exposed through Tailwind v4 `@theme`: rose-gold, sale, success, warning, and ink colors.
+- Vazirmatn for UI text and Markazi Text for display headings.
+- RTL support at the document level and in Radix UI components through `DirectionProvider`.
+- shadcn/ui component library built on Radix primitives.
 
-• رنگ متن اصلی: خاکستری بسیار تیره یا مشکی ملایم.
+### SEO
 
-• رنگ متن ثانویه: خاکستری خنثی.
+- Per-route `head()` metadata: title, description, canonical URL, Open Graph, and Twitter cards.
+- `noindex` for missing products and categories.
+- JSON-LD helpers for structured data and breadcrumbs.
+- `robots.txt`.
 
-• رنگ تأکیدی برای تخفیف‌ها و پیشنهادها: رنگی متمایز با کنتراست مناسب.
+---
 
-رنگ‌ها باید در تمام صفحات یکپارچه باشند و از استفاده بی‌دلیل از رنگ‌های متعدد، گرادیان‌های اغراق‌آمیز و سایه‌های سنگین خودداری شود.
+## Project Status
 
-رنگ‌های اصلی، تایپوگرافی، فاصله‌گذاری‌ها، شعاع گوشه‌ها و سایه‌ها را در قالب یک Design System منسجم تعریف کن.
+This project is under active development. The foundation (design system, data, stores, query logic, layout, and core browsing pages) is in place; the remaining pages are routed placeholders.
 
-تایپوگرافی
+**Implemented**
 
-• از فونت خوانا و مناسب محتوای فروشگاهی استفاده کن.
+- [x] Design system, sample catalog, pricing and query logic
+- [x] Cart, wishlist, demo orders / stock, and demo account stores
+- [x] Layout: announcement bar, header with mega menu and search, mobile navigation, footer
+- [x] Product card, product grid, and product rails
+- [x] Home, shop, category, search, sale, new-arrivals, and product pages
+- [x] Per-route SEO metadata
 
-• سلسله‌مراتب تایپوگرافی باید مشخص باشد.
+**Planned**
 
-• تیترها، توضیحات، قیمت‌ها، برچسب‌ها و متن دکمه‌ها باید اندازه و وزن متناسب داشته باشند.
+- [ ] Shop filter and sort controls in the UI
+- [ ] Product detail: image gallery, variant selection, reviews, related products, JSON-LD
+- [ ] Cart page, checkout flow, and order confirmation
+- [ ] Wishlist and account pages (profile, addresses, orders)
+- [ ] Content pages: about, contact, journal, FAQ, shipping & returns, privacy, terms
+- [ ] Sitemap
+- [ ] Unit tests for pricing, shipping, filtering, and stock rules; end-to-end user flows
 
-• متن‌ها در تمام اندازه‌های صفحه خوانا باشند.
+---
 
-• از متن‌های طولانی و فشرده در بخش‌های فروشگاهی خودداری کن.
+## Tech Stack
 
-تصاویر
+### Frontend
 
-تصاویر باکیفیت و مرتبط با محصولات آرایشی، محصولات مراقبت از پوست، لوازم آرایش و فضای زیبایی به کار ببر.
+| Technology | Purpose |
+| --- | --- |
+| TanStack Start | Full-stack React framework with SSR |
+| TanStack Router | File-based, type-safe routing and search-param validation |
+| React 19 | UI development |
+| TypeScript 5 | Static typing and type safety |
+| Tailwind CSS 4 | Styling and design tokens |
+| shadcn/ui + Radix UI | Accessible component primitives |
+| Zustand | Cart, wishlist, orders, and account state |
+| TanStack Query | Async state management |
+| React Hook Form | Form state management |
+| Zod 3 | Schema validation |
+| lucide-react | Icons |
+| Sonner | Toast notifications |
 
-تصاویر باید:
+### Testing & Code Quality
 
-• از نظر نورپردازی و سبک بصری هماهنگ باشند.
+| Technology | Purpose |
+| --- | --- |
+| Vitest | Unit testing |
+| React Testing Library + jsdom | Component testing |
+| ESLint 9 | Code quality and linting |
+| Prettier | Code formatting |
 
-• کیفیت مناسبی داشته باشند.
+### Build Tools
 
-• نسبت تصویر مشخص و یکپارچه‌ای در کارت‌های محصولات داشته باشند.
+| Technology | Purpose |
+| --- | --- |
+| Vite 8 | Development server and bundling |
+| Nitro | Server output |
+| Bun / npm | Package management |
 
-• متناسب با فضای لوکس و مدرن برند باشند.
+---
 
-• باعث ایجاد پرش ناگهانی در چیدمان صفحه نشوند.
+## Architecture & Key Decisions
 
-از تصاویر بی‌کیفیت، تصاویر نامرتبط و تصاویر تکراری برای تمام محصولات خودداری کن.
+**File-Based Routing with Typed Search Params**
 
-در صورت استفاده از تصاویر خارجی، از منابع قابل دسترس و مجاز استفاده کن و برای تصاویر، متن جایگزین مناسب در نظر بگیر.
+Each route is a file under `src/routes/`. Shop filters live in the URL and are validated by a tolerant `parseShopSearch` function, so filtered views are shareable and survive refresh and browser navigation.
 
+**Query Logic Separated from UI**
 
+Filtering, sorting, searching, and pagination are pure functions in `src/features/products/`. Cart pricing, shipping rules, and stock calculations live in `src/features/cart/` and `src/features/inventory/`. Keeping them free of React makes them straightforward to unit test.
 
-───
+**Hydration-Safe Persistence**
 
+Zustand stores persist to `localStorage` through a storage adapter that returns nothing on the server. Stores are rehydrated explicitly after mount, so the server HTML and first client render always match.
 
+**Replaceable Data Layer**
 
-۳. ساختار کلی وب‌سایت
+Components talk to stores and selectors, not to storage or data files directly. Replacing the local catalog and `localStorage` with a real API means changing the stores and selectors without rewriting the UI.
 
-وب‌سایت باید یک فروشگاه چندصفحه‌ای واقعی باشد.
+**Custom Design Tokens**
 
-صفحات و مسیرهای اصلی پیشنهادی عبارت‌اند از:
+Colors, fonts, and semantic tokens (sale, success, warning) are defined once as CSS variables and mapped into Tailwind v4, so every page shares the same visual language.
 
-• / — صفحه اصلی
+**Typed Catalog**
 
-• /shop — فروشگاه و فهرست محصولات
+Products, variants, categories, brands, and shopping needs are described by shared TypeScript types, so invalid catalog entries and slugs are caught at compile time.
 
-• /category/[slug] — صفحه دسته‌بندی محصولات
+**Per-Route SEO**
 
-• /product/[slug] — صفحه جزئیات محصول
+A single `pageHead` helper builds title, description, canonical, Open Graph, and Twitter metadata for every route, with `noindex` applied to missing entities.
 
-• /search — صفحه نتایج جست‌وجو
+---
 
-• /wishlist — فهرست علاقه‌مندی‌ها
+## Project Structure
 
-• /cart — سبد خرید
-
-• /checkout — فرایند ثبت سفارش
-
-• /account — حساب کاربری
-
-• /account/orders — سفارش‌های کاربر
-
-• /about — درباره ما
-
-• /contact — تماس با ما
-
-• /blog — مجله زیبایی
-
-• /blog/[slug] — صفحه مقاله
-
-• /faq — سؤالات متداول
-
-• /shipping-returns — قوانین ارسال و مرجوعی
-
-• /privacy — حریم خصوصی
-
-• /terms — شرایط استفاده
-
-در صورت نیاز، صفحات دیگری مانند صفحه تخفیف‌ها، محصولات جدید و محصولات پرفروش نیز اضافه کن.
-
-تمام مسیرها باید از نظر طراحی و ناوبری با یکدیگر هماهنگ باشند.
-
-اگر قابلیت‌هایی مانند ورود کاربر یا پرداخت واقعی به زیرساخت بک‌اند نیاز دارند، رابط کاربری آن‌ها را به‌صورت استاندارد طراحی کن؛ اما قابلیت شبیه‌سازی‌شده را به‌عنوان سرویس واقعی معرفی نکن.
-
-
-
-───
-
-
-
-۴. هدر و سیستم ناوبری
-
-یک هدر حرفه‌ای و کاربردی طراحی کن که شامل موارد زیر باشد:
-
-• لوگو و نام برند.
-
-• منوی اصلی سایت.
-
-• دسته‌بندی محصولات.
-
-• کادر جست‌وجوی محصولات.
-
-• آیکون حساب کاربری.
-
-• آیکون علاقه‌مندی‌ها.
-
-• آیکون سبد خرید همراه با تعداد محصولات.
-
-• دسترسی به محصولات جدید و تخفیف‌ها.
-
-رفتار هدر
-
-• در دسکتاپ، منوی اصلی به‌صورت مرتب و استاندارد نمایش داده شود.
-
-• در صورت نیاز، برای دسته‌بندی‌های اصلی از Mega Menu استفاده کن.
-
-• در موبایل، منوی کشویی یا پنل ناوبری مناسب طراحی کن.
-
-• هدر در صورت استفاده از حالت Sticky باید فضای زیادی از صفحه را اشغال نکند.
-
-• آیکون‌ها و دکمه‌ها باید محدوده کلیک مناسبی داشته باشند.
-
-• جست‌وجو باید کاربردی باشد و کاربران بتوانند محصولات را پیدا کنند.
-
-• وضعیت سبد خرید و علاقه‌مندی‌ها در بخش‌های مختلف سایت هماهنگ باقی بماند.
-
-در صورت مناسب بودن، یک نوار اطلاع‌رسانی ظریف برای ارسال رایگان، تخفیف یا پیشنهاد ویژه در بالای هدر قرار بده.
-
-
-
-───
-
-
-
-۵. طراحی کامل صفحه اصلی
-
-صفحه اصلی باید مانند صفحه اصلی یک فروشگاه واقعی طراحی شود و کاربران را به مشاهده محصولات و خرید هدایت کند.
-
-بخش اول: Hero Section
-
-یک بخش ابتدایی چشم‌نواز و حرفه‌ای طراحی کن که شامل موارد زیر باشد:
-
-• تصویر بزرگ و باکیفیت مرتبط با محصولات زیبایی.
-
-• تیتر اصلی جذاب و متناسب با هویت برند.
-
-• توضیح کوتاه درباره محصولات یا ارزش پیشنهادی فروشگاه.
-
-• دکمه اصلی برای مشاهده محصولات.
-
-• دکمه ثانویه برای مشاهده مجموعه‌های ویژه، در صورت نیاز.
-
-ترکیب تصویر و متن باید در دسکتاپ و موبایل به‌خوبی تنظیم شود.
-
-از اسلایدرهای خودکار غیرضروری استفاده نکن. در صورت انتخاب اسلایدر، کنترل آن باید در اختیار کاربر باشد و حرکت‌ها باعث اختلال در تجربه کاربری نشوند.
-
-بخش دوم: دسته‌بندی‌های اصلی
-
-دسته‌بندی‌ها را با تصاویر یا کارت‌های بصری جذاب نمایش بده.
-
-دسته‌بندی‌های پیشنهادی:
-
-• آرایش صورت
-
-• آرایش چشم
-
-• آرایش لب
-
-• مراقبت از پوست
-
-• مراقبت از مو
-
-• عطر و ادکلن
-
-• ابزارهای آرایشی
-
-• محصولات بهداشتی
-
-هر کارت باید کاربر را به صفحه دسته‌بندی مربوط هدایت کند.
-
-بخش سوم: محصولات پرفروش
-
-یک بخش برای محصولات پرفروش طراحی کن.
-
-هر کارت محصول باید شامل موارد زیر باشد:
-
-• تصویر محصول.
-
-• نام محصول.
-
-• برند.
-
-• امتیاز کاربران، در صورت وجود داده معتبر.
-
-• قیمت فعلی.
-
-• قیمت قبلی، در صورت تخفیف.
-
-• درصد تخفیف، در صورت وجود.
-
-• دکمه افزودن به علاقه‌مندی‌ها.
-
-• امکان افزودن سریع به سبد خرید.
-
-• برچسب‌هایی مانند پرفروش یا جدید، در صورت نیاز.
-
-بخش چهارم: محصولات جدید
-
-محصولات جدید را در یک بخش مستقل نمایش بده.
-
-بخش پنجم: پیشنهادهای ویژه
-
-یک بخش جذاب برای محصولات تخفیف‌خورده یا پیشنهادهای محدود طراحی کن.
-
-اگر شمارش معکوس استفاده می‌شود، باید زمان واقعی و معتبر داشته باشد؛ از شمارنده‌های تصادفی و نمایشی که حس فوریت کاذب ایجاد می‌کنند خودداری کن.
-
-بخش ششم: معرفی برند
-
-بخشی برای معرفی فلسفه برند، کیفیت محصولات و ارزش پیشنهادی فروشگاه طراحی کن.
-
-بخش هفتم: محصولات بر اساس نیاز
-
-امکان کشف محصولات را بر اساس نیاز کاربر فراهم کن؛ برای مثال:
-
-• روتین مراقبت از پوست.
-
-• محصولات پوست خشک.
-
-• محصولات پوست چرب.
-
-• محصولات آرایش روزانه.
-
-• محصولات مراقبت از مو.
-
-در صورت نمایش ادعاهای مرتبط با سلامت پوست یا مو، از ادعاهای پزشکی تأییدنشده خودداری کن.
-
-بخش هشتم: مقالات مجله زیبایی
-
-چند مقاله مرتبط با مراقبت از پوست، آرایش و معرفی محصولات نمایش بده.
-
-بخش نهم: عضویت در خبرنامه
-
-یک فرم عضویت در خبرنامه با طراحی ساده و جذاب ایجاد کن.
-
-فرم باید اعتبارسنجی مناسب داشته باشد و وضعیت موفقیت یا خطا را به کاربر نشان دهد.
-
-اگر بک‌اند ایمیل وجود ندارد، ثبت‌نام را به‌عنوان قابلیت نمایشی یا محلی مشخص کن.
-
-بخش دهم: فوتر
-
-فوتر شامل موارد زیر باشد:
-
-• لوگو و معرفی کوتاه برند.
-
-• لینک‌های دسترسی سریع.
-
-• دسته‌بندی‌های مهم.
-
-• اطلاعات تماس نمونه.
-
-• لینک شبکه‌های اجتماعی.
-
-• لینک قوانین و حریم خصوصی.
-
-• بخش عضویت در خبرنامه، در صورت نیاز.
-
-• اطلاعات کپی‌رایت.
-
-از اطلاعات تماس، نمادهای اعتماد و نشان‌های تأییدیه جعلی استفاده نکن.
-
-
-
-───
-
-
-
-۶. سیستم محصولات و کارت محصول
-
-یک کامپوننت استاندارد و قابل استفاده مجدد برای کارت محصولات طراحی کن.
-
-کارت محصول باید در صفحه اصلی، صفحه فروشگاه، صفحات دسته‌بندی و بخش محصولات مرتبط استفاده شود.
-
-قابلیت‌های پیشنهادی:
-
-• نمایش تصویر محصول.
-
-• تغییر ظریف تصویر هنگام Hover، در صورت وجود تصویر دوم.
-
-• نمایش نام محصول و برند.
-
-• نمایش قیمت و تخفیف.
-
-• نمایش امتیاز در صورت وجود داده.
-
-• افزودن به علاقه‌مندی‌ها.
-
-• افزودن سریع به سبد خرید.
-
-• نمایش وضعیت موجودی.
-
-• نمایش برچسب محصول جدید یا پرفروش.
-
-• نمایش پیام مناسب هنگام افزودن به سبد خرید.
-
-در موبایل، قابلیت‌ها باید بدون وابستگی به Hover قابل استفاده باشند.
-
-کارت‌ها باید از نظر ارتفاع، فاصله‌گذاری، تایپوگرافی و نحوه نمایش قیمت یکپارچه باشند.
-
-
-
-───
-
-
-
-۷. صفحه فروشگاه و دسته‌بندی‌ها
-
-صفحه فروشگاه باید برای بررسی تعداد زیادی محصول مناسب باشد.
-
-قابلیت‌های موردنیاز:
-
-جست‌وجو
-
-• جست‌وجو بر اساس نام محصول و برند.
-
-• نمایش پیام مناسب در صورت پیدا نشدن محصول.
-
-• امکان پاک کردن عبارت جست‌وجو.
-
-• حفظ عبارت جست‌وجو هنگام استفاده از فیلترها.
-
-فیلتر محصولات
-
-• دسته‌بندی.
-
-• برند.
-
-• محدوده قیمت.
-
-• موجود بودن محصول.
-
-• محصولات تخفیف‌خورده.
-
-• امتیاز کاربران، در صورت وجود داده.
-
-مرتب‌سازی
-
-• جدیدترین محصولات.
-
-• ارزان‌ترین.
-
-• گران‌ترین.
-
-• پرفروش‌ترین.
-
-• بیشترین امتیاز، در صورت وجود داده معتبر.
-
-تجربه کاربری
-
-• نمایش تعداد نتایج.
-
-• نمایش فیلترهای فعال.
-
-• امکان حذف جداگانه فیلترها.
-
-• دکمه پاک کردن تمام فیلترها.
-
-• صفحه‌بندی یا بارگذاری تدریجی محصولات.
-
-• نمایش Skeleton هنگام بارگذاری.
-
-• نمایش Empty State مناسب.
-
-در موبایل، فیلترها می‌توانند داخل یک Drawer یا Bottom Sheet قرار بگیرند.
-
-نکته مهم: فیلترها، جست‌وجو و مرتب‌سازی باید واقعاً روی داده‌های محصولات اعمال شوند.
-
-اگر داده‌ها در یک مجموعه محلی قرار دارند، همین قابلیت‌ها باید بدون نیاز به بک‌اند کار کنند.
-
-
-
-───
-
-
-
-۸. صفحه جزئیات محصول
-
-صفحه محصول یکی از مهم‌ترین بخش‌های فروشگاه است و باید با دقت طراحی شود.
-
-اطلاعات اصلی
-
-• گالری تصاویر محصول.
-
-• تصویر اصلی بزرگ.
-
-• تصاویر کوچک برای انتخاب تصویر.
-
-• امکان بزرگ‌نمایی تصویر، در صورت مناسب بودن.
-
-• نام محصول.
-
-• نام برند.
-
-• قیمت فعلی و قیمت قبلی.
-
-• میزان تخفیف.
-
-• وضعیت موجودی.
-
-• توضیح کوتاه محصول.
-
-• انتخاب تعداد.
-
-• دکمه افزودن به سبد خرید.
-
-• دکمه افزودن به علاقه‌مندی‌ها.
-
-مشخصات تخصصی محصولات آرایشی
-
-متناسب با نوع محصول، اطلاعات زیر نمایش داده شوند:
-
-• حجم یا وزن.
-
-• رنگ یا Shade.
-
-• نوع پوست مناسب.
-
-• نوع محصول.
-
-• ترکیبات یا مواد تشکیل‌دهنده.
-
-• نحوه استفاده.
-
-• ویژگی‌های محصول.
-
-• کشور سازنده، در صورت وجود داده معتبر.
-
-برای محصولاتی مانند رژلب یا کرم‌پودر، امکان انتخاب رنگ با Swatchهای قابل دسترس فراهم کن.
-
-برای محصولات دارای حجم یا مدل متفاوت، انتخاب Variant باید موجودی و قیمت صحیح همان گزینه را در نظر بگیرد.
-
-بخش‌های تکمیلی
-
-• توضیحات کامل.
-
-• مشخصات فنی یا ترکیبات.
-
-• نحوه استفاده.
-
-• پرسش‌های متداول درباره محصول.
-
-• امتیاز و نظرات کاربران.
-
-• محصولات مرتبط.
-
-• محصولات مکمل.
-
-نظرات کاربران را از داده‌های نمونه مشخص و شفاف نمایش بده و آن‌ها را به‌عنوان نظرات واقعی مشتریان معرفی نکن.
-
-
-
-───
-
-
-
-۹. سبد خرید و فرایند خرید
-
-یک فرایند خرید ساده و استاندارد طراحی کن.
-
-سبد خرید
-
-امکانات موردنیاز:
-
-• نمایش محصولات انتخاب‌شده.
-
-• تصویر و نام محصول.
-
-• نمایش Variant انتخاب‌شده.
-
-• قیمت واحد.
-
-• تغییر تعداد.
-
-• حذف محصول.
-
-• نمایش مبلغ کل محصولات.
-
-• نمایش تخفیف‌ها.
-
-• محاسبه هزینه ارسال، در صورت تعریف قوانین آن.
-
-• نمایش مبلغ نهایی.
-
-• دکمه ادامه خرید.
-
-• دکمه ادامه به تسویه‌حساب.
-
-مبالغ باید از روی داده‌های واقعی محصولات و قوانین قیمت‌گذاری محاسبه شوند.
-
-تسویه‌حساب
-
-فرم تسویه‌حساب شامل موارد زیر باشد:
-
-• نام و نام خانوادگی.
-
-• ایمیل.
-
-• شماره تماس، در صورت نیاز.
-
-• آدرس ارسال.
-
-• شهر و کد پستی، متناسب با بازار هدف.
-
-• روش ارسال.
-
-• خلاصه سفارش.
-
-• مبلغ نهایی.
-
-• امکان بررسی اطلاعات پیش از ثبت سفارش.
-
-اعتبارسنجی فرم‌ها باید واضح و کاربردی باشد.
-
-خطاها باید در نزدیکی فیلد مربوط نمایش داده شوند و اطلاعات واردشده هنگام خطاهای قابل اصلاح از بین نروند.
-
-اگر پرداخت واقعی پیاده‌سازی نشده است، یک مرحله ثبت سفارش آزمایشی ایجاد کن و صریحاً نشان بده که این یک محیط Demo است.
-
-هرگز یک درگاه پرداخت جعلی را به‌عنوان درگاه واقعی نمایش نده.
-
-
-
-───
-
-
-
-۱۰. علاقه‌مندی‌ها و حساب کاربری
-
-علاقه‌مندی‌ها
-
-کاربر بتواند:
-
-• محصولی را به علاقه‌مندی‌ها اضافه کند.
-
-• آن را حذف کند.
-
-• فهرست علاقه‌مندی‌ها را مشاهده کند.
-
-• محصول را مستقیماً به سبد خرید منتقل کند.
-
-حساب کاربری
-
-صفحه حساب کاربری را با ساختار قابل توسعه طراحی کن.
-
-بخش‌های پیشنهادی:
-
-• اطلاعات شخصی.
-
-• آدرس‌های ذخیره‌شده.
-
-• تاریخچه سفارش‌ها.
-
-• جزئیات سفارش.
-
-• وضعیت سفارش.
-
-اگر احراز هویت واقعی وجود ندارد، قابلیت‌های مربوط به حساب کاربری را به‌صورت Demo مشخص کن و از نمایش ورود یا ثبت‌نام موفقیت‌آمیزِ غیرواقعی خودداری کن.
-
-
-
-───
-
-
-
-۱۱. قابلیت‌های تعاملی و انیمیشن‌ها
-
-از انیمیشن برای بهبود تجربه کاربری استفاده کن، نه صرفاً برای تزئین.
-
-انیمیشن‌ها باید ظریف، سریع و هماهنگ با هویت بصری برند باشند.
-
-موارد پیشنهادی:
-
-• ورود ملایم بخش Hero.
-
-• ظاهر شدن تدریجی بخش‌ها هنگام اسکرول، در صورت نیاز.
-
-• Hover ظریف روی کارت محصولات.
-
-• تغییر نرم وضعیت دکمه‌ها.
-
-• انیمیشن باز و بسته شدن منوها و Drawerها.
-
-• نمایش مناسب پنجره‌های Modal.
-
-• بازخورد بصری هنگام افزودن محصول به سبد خرید.
-
-• نمایش Toast برای موفقیت یا خطا.
-
-• انیمیشن تغییر تصویر محصول.
-
-• Skeleton Loading هنگام بارگذاری داده‌ها.
-
-از انیمیشن‌های طولانی، سنگین، تکراری و مزاحم خودداری کن.
-
-به تنظیمات prefers-reduced-motion احترام بگذار تا کاربرانی که کاهش حرکت را ترجیح می‌دهند، تجربه مناسبی داشته باشند.
-
-از انیمیشن‌های مبتنی بر تغییر مداوم ویژگی‌های پرهزینه مانند width و height پرهیز کن؛ در صورت امکان از transform و opacity استفاده کن.
-
-
-
-───
-
-
-
-۱۲. تکنولوژی‌ها و کتابخانه‌های مورد استفاده
-
-پروژه باید با معماری مناسب و ابزارهای مدرن اکوسیستم React و Next.js پیاده‌سازی شود.
-
-هسته اصلی
-
-• Next.js: استفاده از App Router.
-
-• TypeScript: استفاده از تایپ‌های دقیق برای محصولات، دسته‌بندی‌ها، سبد خرید، سفارش‌ها و سایر داده‌ها.
-
-• React: ساخت رابط کاربری با کامپوننت‌های قابل استفاده مجدد.
-
-• Tailwind CSS: پیاده‌سازی استایل‌ها و طراحی ریسپانسیو.
-
-از نسخه‌های پایدار و سازگار کتابخانه‌ها استفاده کن.
-
-کتابخانه‌های پیشنهادی
-
-۱. shadcn/ui
-
-برای ساخت کامپوننت‌های استاندارد و قابل شخصی‌سازی مانند:
-
-• Dialog
-
-• Sheet
-
-• Dropdown Menu
-
-• Tabs
-
-• Accordion
-
-• Select
-
-• Tooltip
-
-• Form Components
-
-کامپوننت‌ها را متناسب با هویت بصری فروشگاه سفارشی‌سازی کن و از ظاهر پیش‌فرض و بدون تغییر آن‌ها خودداری کن.
-
-۲. Lucide React
-
-برای آیکون‌های استاندارد و یکپارچه.
-
-از آیکون‌های هماهنگ استفاده کن و از ترکیب چند سبک نامرتبط آیکون خودداری کن.
-
-۳. Framer Motion / Motion
-
-برای انیمیشن‌های ظریف رابط کاربری، در صورت نیاز.
-
-نسخه و API متناسب با وابستگی‌های نصب‌شده را انتخاب کن و از افزودن انیمیشن‌های غیرضروری خودداری کن.
-
-۴. React Hook Form
-
-برای مدیریت فرم‌های پیچیده مانند تسویه‌حساب و فرم‌های اطلاعات کاربری.
-
-۵. Zod
-
-برای اعتبارسنجی داده‌ها و فرم‌ها با Schemaهای مشخص و تایپ‌های هماهنگ با TypeScript.
-
-در صورت نیاز، از @hookform/resolvers برای اتصال Zod به React Hook Form استفاده کن.
-
-۶. Zustand
-
-برای مدیریت Stateهای اشتراکی مانند سبد خرید و علاقه‌مندی‌ها، در صورت نیاز.
-
-Stateهای ساده و محلی را بی‌دلیل وارد Store سراسری نکن.
-
-۷. TanStack Query
-
-در صورت اتصال به API، برای مدیریت درخواست‌ها، Cache و وضعیت داده‌های سرور.
-
-اگر پروژه کاملاً مبتنی بر داده‌های محلی است، از اضافه کردن آن بدون نیاز واقعی خودداری کن.
-
-۸. Sonner
-
-برای نمایش پیام‌های موفقیت، خطا و بازخوردهای کوتاه.
-
-۹. Embla Carousel
-
-در صورت نیاز برای اسلایدر محصولات، گالری یا بخش‌های افقی قابل پیمایش.
-
-اسلایدر باید کنترل مناسب داشته باشد و در موبایل نیز به‌درستی کار کند.
-
-۱۰. date-fns
-
-فقط در صورت نیاز برای قالب‌بندی تاریخ سفارش‌ها و اطلاعات زمانی.
-
-ابزارهای تکمیلی
-
-• ESLint برای بررسی کیفیت کد.
-
-• TypeScript Strict Mode برای کاهش خطاهای نوعی.
-
-• ابزار تست متناسب با نیاز پروژه، مانند Vitest و React Testing Library.
-
-• Playwright برای تست جریان‌های مهم کاربر در مرورگر.
-
-اصل مهم: کتابخانه‌ها را صرفاً برای افزایش تعداد تکنولوژی‌ها نصب نکن. هر کتابخانه باید کاربرد مشخصی داشته باشد و با نسخه Next.js، React و سایر وابستگی‌ها سازگار باشد.
-
-از ایجاد وابستگی‌های تکراری برای یک وظیفه خودداری کن.
-
-
-
-───
-
-
-
-۱۳. معماری پروژه و کیفیت کد
-
-ساختار پروژه باید منظم، قابل توسعه و مناسب یک نمونه‌کار حرفه‌ای باشد.
-
-مسئولیت صفحات، کامپوننت‌ها، داده‌ها، منطق کسب‌وکار و لایه دسترسی به داده را تا حد امکان از یکدیگر جدا کن.
-
-ساختار پیشنهادی:
-
-text
-
+```text
 src/
-
-├── app/
-
-│   ├── page.tsx
-
-│   ├── shop/
-
-│   ├── category/
-
-│   ├── product/
-
-│   ├── search/
-
-│   ├── wishlist/
-
-│   ├── cart/
-
-│   ├── checkout/
-
-│   ├── account/
-
-│   ├── about/
-
-│   ├── contact/
-
-│   ├── blog/
-
-│   └── ...
-
-│
-
+├── routes/                    # File-based routes (pages)
 ├── components/
-
-│   ├── layout/
-
-│   ├── home/
-
-│   ├── products/
-
-│   ├── cart/
-
-│   ├── checkout/
-
-│   ├── forms/
-
-│   ├── ui/
-
-│   └── shared/
-
+│   ├── ui/                    # shadcn/ui primitives
+│   ├── layout/                # Header, footer, logo, search
+│   ├── products/              # Product card, rails, price, rating, wishlist
+│   └── shared/                # Breadcrumbs, states, newsletter, reveal
 │
-
 ├── features/
-
-│   ├── products/
-
-│   ├── cart/
-
-│   ├── wishlist/
-
-│   └── checkout/
-
+│   ├── products/              # Query engine and selectors
+│   ├── cart/                  # Pricing and shipping rules
+│   └── inventory/             # Stock availability
 │
+├── store/                     # Zustand stores (cart, wishlist, orders, account)
+├── data/                      # Typed sample catalog, reviews, journal
+├── hooks/                     # Shared hooks
+├── lib/                       # Formatting, SEO, storage, image helpers
+├── types/                     # Shared TypeScript types
+├── assets/                    # Bundled product and editorial images
+├── test/                      # Vitest setup and tests
+└── styles.css                 # Design tokens and global styles
+```
 
-├── hooks/
+---
 
-├── lib/
+## Testing
 
-├── services/
+Unit and component tests run with **Vitest**, **React Testing Library**, and **jsdom**.
 
-├── store/
+```bash
+npm test
+```
 
-├── types/
+Current coverage is a routing smoke test. Tests for the pricing, shipping, filtering, and stock rules are planned (see [Project Status](#project-status)).
 
-├── data/
+---
 
-└── styles/
+## Getting Started
 
+### Prerequisites
 
+- Node.js 20.19 or newer
+- npm or Bun
 
-این ساختار یک الگوی پیشنهادی است؛ آن را متناسب با نیاز واقعی پروژه اصلاح کن و از پیچیدگی غیرضروری خودداری کن.
+### Installation
 
-اصول کدنویسی
+Clone the repository:
 
-• از any بدون ضرورت استفاده نکن.
+```bash
+git clone https://github.com/yektaakhavan/rose-glow-beauty-boutique.git
+cd rose-glow-beauty-boutique
+```
 
-• تایپ‌های مشترک را در محل مناسب تعریف کن.
+Install dependencies:
 
-• منطق کسب‌وکار را از JSX جدا نگه دار.
+```bash
+npm install
+```
 
-• از کامپوننت‌های تکراری و بسیار بزرگ اجتناب کن.
+### Run Development Server
 
-• از Client Component فقط در بخش‌هایی استفاده کن که واقعاً به State، Event Handler یا قابلیت‌های مرورگر نیاز دارند.
-
-• برای بخش‌های مناسب از Server Componentهای Next.js استفاده کن.
-
-• ساختار مسیرها و نام‌گذاری فایل‌ها را یکپارچه نگه دار.
-
-• از استفاده بی‌دلیل از useEffect برای محاسبات مشتق‌شده خودداری کن.
-
-• محاسبات قیمت، تخفیف و مبلغ نهایی باید در توابع مشخص و قابل تست قرار بگیرند.
-
-• داده‌های نمونه را از کامپوننت‌های نمایشی جدا کن.
-
-• از کپی کردن داده‌های یک محصول در چند محل مختلف خودداری کن.
-
-
-
-───
-
-
-
-۱۴. داده‌های نمونه و عملکرد واقعی فروشگاه
-
-برای اینکه فروشگاه از نظر بصری و عملکردی کامل باشد، مجموعه‌ای از داده‌های نمونه واقع‌گرایانه ایجاد کن.
-
-حداقل ۲۴ تا ۳۶ محصول نمونه در دسته‌بندی‌های مختلف در نظر بگیر.
-
-محصولات باید از نظر نام، برند، قیمت، تصویر، نوع پوست، رنگ، حجم و مشخصات، تنوع مناسبی داشته باشند.
-
-برای مثال:
-
-• رژلب.
-
-• ریمل.
-
-• کرم‌پودر.
-
-• کانسیلر.
-
-• رژگونه.
-
-• سرم پوستی.
-
-• مرطوب‌کننده.
-
-• ضدآفتاب.
-
-• شوینده صورت.
-
-• ماسک مو.
-
-• شامپو.
-
-• عطر.
-
-• براش آرایشی.
-
-داده‌های نمونه باید ساختار مشخص و تایپ‌شده داشته باشند.
-
-هر محصول، در صورت نیاز، شامل فیلدهای زیر باشد:
-
-• شناسه یکتا.
-
-• نام محصول.
-
-• Slug.
-
-• برند.
-
-• دسته‌بندی.
-
-• توضیحات کوتاه.
-
-• توضیحات کامل.
-
-• قیمت.
-
-• قیمت قبلی.
-
-• تصاویر.
-
-• موجودی.
-
-• ویژگی‌ها.
-
-• Variantها.
-
-• امتیاز نمونه.
-
-• وضعیت محصول.
-
-• برچسب‌های نمایشی.
-
-فیلدها را متناسب با نوع محصول طراحی کن؛ برای مثال همه محصولات الزاماً رنگ یا نوع پوست ندارند.
-
-منطق فروشگاه
-
-موارد زیر باید واقعاً کار کنند:
-
-• جست‌وجو.
-
-• فیلتر.
-
-• مرتب‌سازی.
-
-• انتخاب Variant.
-
-• افزودن و حذف محصول از سبد خرید.
-
-• تغییر تعداد.
-
-• محاسبه مبلغ نهایی.
-
-• افزودن به علاقه‌مندی‌ها.
-
-• حذف از علاقه‌مندی‌ها.
-
-• حفظ State بین صفحات.
-
-• مدیریت موجودی نمونه.
-
-• مدیریت حالت‌های خالی و خطا.
-
-برای یک نسخه Demo بدون بک‌اند، می‌توانی از localStorage برای ذخیره سبد خرید و علاقه‌مندی‌ها استفاده کنی.
-
-در این حالت، موارد زیر را رعایت کن:
-
-• دسترسی به localStorage را به محیط مرورگر محدود کن.
-
-• از بروز ناسازگاری Hydration در Next.js جلوگیری کن.
-
-• وضعیت اولیه و زمان Hydration را به‌درستی مدیریت کن.
-
-• هنگام بارگذاری اولیه، تجربه کاربری ناپایدار ایجاد نکن.
-
-• ساختار کد را طوری بنویس که بعداً بتوان Storage محلی را با API جایگزین کرد.
-
-اطلاعات حساس یا رمز عبور را در localStorage ذخیره نکن.
-
-
-
-───
-
-
-
-۱۵. ریسپانسیو بودن کامل
-
-وب‌سایت باید با رویکرد Mobile-First طراحی شود.
-
-اندازه‌های زیر را به‌صورت عملی بررسی کن:
-
-• موبایل کوچک: حدود ۳۲۰ تا ۳۷۵ پیکسل.
-
-• موبایل استاندارد: حدود ۳۹۰ تا ۴۳۰ پیکسل.
-
-• تبلت: حدود ۷۶۸ پیکسل.
-
-• لپ‌تاپ: حدود ۱۰۲۴ تا ۱۴۴۰ پیکسل.
-
-• نمایشگر بزرگ: ۱۴۴۰ پیکسل به بالا.
-
-این اندازه‌ها نقاط مرجع هستند و طراحی نباید فقط در همین عرض‌ها درست کار کند.
-
-الزامات ریسپانسیو
-
-• هیچ اسکرول افقی ناخواسته‌ای وجود نداشته باشد.
-
-• کارت‌های محصولات متناسب با عرض صفحه تغییر چیدمان دهند.
-
-• تصاویر در اندازه‌های مختلف به‌درستی نمایش داده شوند.
-
-• منوی موبایل کاملاً کاربردی باشد.
-
-• فیلترها در موبایل به‌راحتی قابل دسترسی باشند.
-
-• سبد خرید در موبایل خوانا و قابل استفاده باشد.
-
-• فرم‌های طولانی در موبایل به‌درستی چیدمان شوند.
-
-• دکمه‌ها محدوده لمس مناسبی داشته باشند.
-
-• فاصله‌ها و اندازه فونت‌ها در Breakpointهای مختلف تنظیم شوند.
-
-• بخش Hero در موبایل چیدمان مستقل و مناسب داشته باشد.
-
-• جدول‌ها و اطلاعات سفارش در نمایشگر کوچک قابل استفاده باشند.
-
-• پنجره‌های Modal از صفحه خارج نشوند.
-
-• عناصر تعاملی صرفاً به Hover وابسته نباشند.
-
-از Breakpointهای Tailwind به‌صورت منطقی استفاده کن و فقط برای دستگاه‌های خاص طراحی جداگانه و غیرضروری نساز.
-
-
-
-───
-
-
-
-۱۶. دسترس‌پذیری و استانداردهای UI/UX
-
-رعایت اصول دسترس‌پذیری و تجربه کاربری در تمام صفحات ضروری است.
-
-الزامات
-
-• استفاده صحیح از عناصر معنایی HTML.
-
-• ساختار Heading منطقی.
-
-• امکان استفاده از کیبورد.
-
-• نمایش واضح Focus برای عناصر تعاملی.
-
-• رعایت کنتراست رنگی مناسب.
-
-• تعریف Label مناسب برای فرم‌ها.
-
-• نمایش خطاهای فرم به‌صورت قابل فهم.
-
-• تعریف نام قابل دسترس برای آیکون‌های بدون متن.
-
-• استفاده صحیح از aria-label و سایر ویژگی‌های ARIA در مواقع لازم.
-
-• عدم استفاده از ARIA برای جایگزینی HTML معنایی صحیح.
-
-• جلوگیری از وابستگی اطلاعات مهم به رنگ به‌تنهایی.
-
-• رعایت تنظیمات کاهش حرکت.
-
-• ارائه بازخورد واضح برای عملیات موفق و ناموفق.
-
-• جلوگیری از ارسال چندباره فرم در زمان پردازش.
-
-• طراحی Empty State و Error State برای بخش‌های اصلی.
-
-• استفاده از Loading State مناسب.
-
-رفتار دکمه‌ها، لینک‌ها، فرم‌ها و منوها باید برای کاربر قابل پیش‌بینی باشد.
-
-
-
-───
-
-
-
-۱۷. بهینه‌سازی عملکرد
-
-عملکرد سایت باید در حد یک نمونه‌کار حرفه‌ای باشد.
-
-موارد زیر را رعایت کن:
-
-• استفاده مناسب از قابلیت‌های Next.js.
-
-• استفاده از next/image برای تصاویر محصولات، در صورت سازگاری با منبع تصاویر.
-
-• تعیین ابعاد مناسب تصاویر برای جلوگیری از Layout Shift.
-
-• بارگذاری تنبل تصاویر خارج از محدوده اولیه صفحه.
-
-• پرهیز از Lazy Loading تصویر اصلی Hero در صورت قرار داشتن در محدوده اولیه نمایش.
-
-• استفاده از Dynamic Import برای بخش‌های سنگین در صورت نیاز.
-
-• جلوگیری از نصب کتابخانه‌های سنگین و غیرضروری.
-
-• محدود کردن حجم JavaScript سمت کلاینت.
-
-• جلوگیری از رندرهای غیرضروری.
-
-• استفاده از فونت‌های بهینه.
-
-• تعریف سیاست مناسب Cache متناسب با نوع داده.
-
-• مدیریت صحیح تصاویر و منابع خارجی.
-
-• جلوگیری از ایجاد CLS و کاهش LCP.
-
-• بررسی مشکلات عملکردی در موبایل.
-
-هدف، بهبود معیارهای Core Web Vitals شامل LCP، INP و CLS است.
-
-در صورت امکان، نتایج Lighthouse را برای صفحات اصلی بررسی کن و مشکلات واقعی را برطرف کن؛ اما امتیازهای غیرواقعی یا تضمین‌شده ادعا نکن.
-
-
-
-───
-
-
-
-۱۸. سئو و قابلیت کشف محصولات
-
-ساختار سایت باید برای موتورهای جست‌وجو مناسب باشد.
-
-موارد ضروری
-
-• عنوان و Meta Description اختصاصی برای صفحات مهم.
-
-• URLهای خوانا و معنادار.
-
-• ساختار Heading مناسب.
-
-• استفاده از لینک‌های داخلی.
-
-• Open Graph Metadata.
-
-• تنظیم Metadata در سطح صفحه.
-
-• ساخت Sitemap در صورت نیاز.
-
-• تعریف robots.txt.
-
-• استفاده از Canonical در صفحات مناسب.
-
-• نمایش محتوای اصلی محصولات به شکلی قابل دسترسی برای موتورهای جست‌وجو.
-
-• استفاده از Breadcrumb در صفحات محصول و دسته‌بندی.
-
-• افزودن داده‌های ساختاریافته مناسب.
-
-در صورت وجود اطلاعات معتبر، از Schemaهای مرتبط مانند موارد زیر استفاده کن:
-
-• Product
-
-• BreadcrumbList
-
-• Organization
-
-• Article
-
-اطلاعاتی مانند قیمت، موجودی و امتیاز در Structured Data باید با اطلاعات واقعی همان صفحه هماهنگ باشند.
-
-برای امتیاز یا Review ساختگی، داده ساختاریافته‌ای ایجاد نکن که وجود نظرات واقعی را القا کند.
-
-
-
-───
-
-
-
-۱۹. تست و کنترل کیفیت
-
-قبل از نهایی کردن پروژه، آن را از نظر عملکردی و ظاهری بررسی کن.
-
-سناریوهای تست
-
-۱. کاربر وارد صفحه اصلی می‌شود و به فروشگاه می‌رود.
-
-۲. کاربر محصولی را جست‌وجو می‌کند.
-
-۳. کاربر چند فیلتر را هم‌زمان اعمال می‌کند.
-
-۴. کاربر ترتیب نمایش محصولات را تغییر می‌دهد.
-
-۵. کاربر وارد صفحه جزئیات محصول می‌شود.
-
-۶. کاربر یک Variant را انتخاب می‌کند.
-
-۷. کاربر محصول را به سبد خرید اضافه می‌کند.
-
-۸. کاربر تعداد محصول را تغییر می‌دهد.
-
-۹. مبلغ نهایی سبد خرید به‌درستی محاسبه می‌شود.
-
-۱۰. کاربر محصولی را به علاقه‌مندی‌ها اضافه می‌کند.
-
-۱۱. کاربر صفحه را Refresh می‌کند و اطلاعات ذخیره‌شده مورد انت
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://rose-glow-beauty-boutique.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/d06499ef-bfab-4599-aefb-0eab99b7dfc4).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
 npm run dev
 ```
+
+Open the local URL printed in the terminal.
+
+### Production Build
+
+```bash
+npm run build
+npm run preview
+```
+
+---
+
+## Available Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm run build:dev` | Create a development-mode build |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+| `npm test` | Run unit and component tests |
+| `npm run test:watch` | Run tests in watch mode |
+| `npm run format` | Format code with Prettier |
+
+---
+
+## Demo Limitations
+
+Rose Glow Beauty Boutique is a frontend engineering demonstration, not a real store.
+
+- **Fictional content:** The brand, products, prices, reviews, and articles are invented sample data.
+- **No payments or checkout backend:** No real orders are placed or paid for.
+- **Browser-only state:** Cart, wishlist, demo orders, profile, and newsletter sign-up are stored in `localStorage` and are not shared between devices or browsers.
+- **Sample reviews:** Ratings are computed from sample reviews, and the interface labels them as sample data.
+- **Persian only:** The interface is currently available in Persian (RTL) only.
+- **Unfinished pages:** Cart, checkout, account, wishlist, and content pages are placeholders for now.
+- **Browser testing:** Automated tests currently cover routing only; cross-browser testing has not been done.
+
+---
+
+## Author
+
+**Yekta Akhavan**
+
+Frontend Engineer | React, Next.js, TypeScript
+
+[![GitHub](https://img.shields.io/badge/GitHub-yektaakhavan-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/yektaakhavan)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Yekta_Akhavan-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yekta-akhavan/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit_Website-000000?style=flat-square&logo=vercel&logoColor=white)](https://yekta-akhavan.vercel.app/)
+[![Email](https://img.shields.io/badge/Email-Contact-EA4335?style=flat-square&logo=gmail&logoColor=white)](mailto:yekta.akhavan.dev@gmail.com)
